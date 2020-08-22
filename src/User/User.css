@@ -1,0 +1,48 @@
+* {
+    margin: 0px auto;
+    padding: 0px;
+}
+
+table, tr, td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+td, th {
+    padding: 5px;
+    text-align: center;
+}
+
+th {
+    background-color: salmon;
+}
+
+td {
+    background-color: aqua;
+    color: black;
+}
+
+.col1 {
+    width: 7%; 
+}
+
+.col2 {
+    width: 30%;
+}
+
+.col3 {
+    width: 56%;
+}
+
+.back {
+    margin: 15px auto;
+    text-decoration: none;
+    font-size: large;
+    text-align: center;
+    color: black;
+    font-weight: bolder;
+    padding: 15px;
+    width: 10%;
+    background-color: salmon;
+    border-radius: 30px;
+}

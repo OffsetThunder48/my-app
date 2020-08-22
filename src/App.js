@@ -1,37 +1,29 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import {BrowserRouter, Route} from 'react-router-dom';
 
-import Container from './JsonContainer/JsonContainer';
+import Users from './Users/Users';
+import User from './User/User'
 
 import './App.css';
 
 class App extends Component {
-  state = {
-    users: []
-  };
-
-  componentDidMount() {
-    axios.get('https://jsonplaceholder.typicode.com/posts').then(
-      res => this.setState({users: res.data}) 
-    )
-  }
-
   render() {
-    const users = this.state.users.map(
-      user => <Container key={user.id} userId={user.userId} id={user.id} title={user.title} body={user.body} />
-    )
     return (
-      <div className="App">
-        <header className="app-header">
-          <ul>
-            <li>Dummy 1</li>
-            <li>Dummy 2</li>
-            <li>Dummy 3</li>
-            <li>Dummy 4</li>
-          </ul>
-        </header>
-        {users}
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <header className="app-header">
+            <ul>
+              <li>Dummy 1</li>
+              <li>Dummy 2</li>
+              <li>Dummy 3</li>
+              <li>Dummy 4</li>
+            </ul> 
+          </header>
+          <Route path="/" exact component={Users}/>
+          <Route path="/users" exact component={Users}/>
+          <Route path="/users/:id" exact component={User} />
+        </div>
+      </BrowserRouter>
     );
   }
 };
