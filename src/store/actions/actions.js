@@ -44,7 +44,7 @@ export const fetchUsers = () => {
             res.data.forEach(user => {
                 user.likes = 500;
                 user.dislikes = 100
-            })
+            });
             dispatch(setUsers(res.data))
         }
     ).catch(err => console.log(err)) 

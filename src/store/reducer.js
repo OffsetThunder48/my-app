@@ -8,7 +8,7 @@ const intitialState = {
 };
 
 const reducer = (state = intitialState, payload) => {
-    console.log(payload.user);
+    console.log(payload.users);
     switch(payload.type) {
         case actionTypes.SET_USERS : 
         return {
