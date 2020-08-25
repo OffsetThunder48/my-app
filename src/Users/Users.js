@@ -1,62 +1,50 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'; 
 
 import Wrapper from './UserModel';
 import * as actionTypes from '../store/actions/actions';
 
-const style = {
-    height: 'auto',
-    width: 'auto'
-}
-
-const divStyle = {
-    display: 'flex',
-    'flex-direction': 'column',
-    justifyContent: 'center'
-}
-
 class Users extends Component {
       componentDidMount() {
+        console.log(this.props.user);
         this.props.onFetchUsers();
-        console.log(this.props.likes, this.props.dislikes)
+        //console.log(this.props.state.users[5].likes)
       }
 
     render() {
-        const users = this.props.users.map(
-            user =>
-            <section> 
-                <Link style={style} key={user.id} to={{pathname: '/users/' + this.props.id, state: user}}>
-                    <Wrapper id={user.id} userId={user.userId} title={user.title} />
-                </Link>
-                {this.props.likes}
-                {this.props.dislikes}
-                <button styles={divStyle} onClick={this.props.onLikeAdded}>Add Like</button>
-                <button styles={divStyle} onClick={this.props.onLikeRemoved}>Remove Like</button>
-                <button styles={divStyle} onClick={this.props.onDislikeAdded}>Add Dislike</button>
-                <button styles={divStyle} onClick={this.props.onDislikeRemoved}>Remove Dislike</button>
-            </section>
-        );
-        return (
-            users
-        )
+        console.log(this.props.isLoading, this.props.users, this.props);
+        const users = this.props.users.map(user =>
+        <Wrapper
+            key={user.id}
+            id={user.id} 
+            userId={user.userId}
+            title={user.title} 
+            user={user}
+            likes={user.likes}
+            dislikes={user.dislikes}
+            onDislikeAdded={() => this.props.onDislikeAdded(user)}
+            onDislikeRemoved = {() => this.props.onDislikeRemoved(user)}
+            onLikeAdded={()=>this.props.onLikeAdded(user)}
+            onLikeRemoved={() => this.props.onLikeRemoved(user)} />);
+        return users;                        
     }
 }
 
 const mapStateToProps = state => {
     return {
         users: state.users,
-        likes: state.likes,
-        dislikes: state.dislikes
+        isLoading: state.isLoading,
+        user: state.user,
+        errors: null
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLikeAdded: (likes) => dispatch({type: actionTypes.ADD_LIKE, likes}),
-        onLikeRemoved: (likes) => dispatch({type: actionTypes.REMOVE_LIKE, likes}),
-        onDislikeAdded: (dislike) => dispatch({type: actionTypes.ADD_DISLIKE, dislike}),
-        onDislikeRemoved: (dislike) => dispatch({type: actionTypes.REMOVE_DISLIKE, dislike}),
+        onLikeAdded: (user) => dispatch({type: actionTypes.ADD_LIKE, user}),
+        onLikeRemoved: (user) => dispatch({type: actionTypes.REMOVE_LIKE, user}),
+        onDislikeAdded: (user) => dispatch({type: actionTypes.ADD_DISLIKE, user}),
+        onDislikeRemoved: (user) => dispatch({type: actionTypes.REMOVE_DISLIKE, user}),
         onFetchUsers: () => dispatch(actionTypes.fetchUsers())
     }
 }
