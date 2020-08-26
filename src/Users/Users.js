@@ -6,9 +6,7 @@ import * as actionTypes from '../store/actions/actions';
 
 class Users extends Component {
       componentDidMount() {
-        console.log(this.props.user);
         this.props.onFetchUsers();
-        //console.log(this.props.state.users[5].likes)
       }
 
     render() {

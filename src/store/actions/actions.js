@@ -10,6 +10,7 @@ export const FETCH_USER = 'FETCH_USER';
 export const SET_USER = 'SET_USER';
 
 export const setUsers = (users) => {
+    console.log(users);
     return {
         type: SET_USERS,
         users: users
@@ -42,10 +43,9 @@ export const fetchUsers = () => {
             body: `${user.body}`,
             }));
             res.data.forEach(user => {
-                user.likes = 500;
-                user.dislikes = 100;
+                user.likes = 500
+                user.dislikes = 100
             })
-            console.log(res.data);
             dispatch(setUsers(res.data))
         }
     ).catch(err => console.log(err)) 
@@ -55,10 +55,7 @@ export const fetchUsers = () => {
 export const fetchUser = (id) => {
     return dispatch => {
         axios.get('https://jsonplaceholder.typicode.com/posts/' + id).then(
-            res => {
-                console.log(res.data);
-                dispatch(setUser(res.data))
-            }
+            res => dispatch(setUser(res.data))
         ).catch(err => console.log(err))
     }
 }
