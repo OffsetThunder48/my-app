@@ -9,7 +9,6 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      
         <div className="App">
           <header className="app-header">
             <ul>
@@ -19,13 +18,14 @@ class App extends Component {
               <li>Dummy 4</li>
             </ul> 
           </header>
-          <Route path="/" exact component={Users} />
+          {this.spinner}
           <Route path="/users/" exact component={Users} />
           <Route path="/users/:id" exact component={User} />
+          <Route path="/" component={Users} />
         </div>
       
     );
   }
 };
 
-export default App;
+export default App

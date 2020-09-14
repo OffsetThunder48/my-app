@@ -27,4 +27,5 @@
 .app-header ul li:hover {
   background-color: black;
   transition: 0.5s;
+  cursor: pointer;
 }
